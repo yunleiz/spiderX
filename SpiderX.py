@@ -10,14 +10,24 @@ class SpiderX:
 		self._urls = urls
 		self._content = []
 
-	def crawl(self, callback = None):
-		html =  urllib.request.urlopen(self._urls[0]).read()
-		print(html)
-		
+	def crawl(self, callback):
+		'''
+		callback: user define callback to parse html content for each url.
+		callback: returns will be push into _content 
+		'''
+		for url in self._urls:
+			self._content.append(callback
+								(urllib.request.urlopen
+									(url).read()))
+	def watch(self):
+		return self._content		
 	
 	
 
 if __name__ == "__main__":
+	def plain(html):
+		return html
 	s = SpiderX(['http://google.ca/'])
-	s.crawl()
+	s.crawl(plain)
+	print(s.watch())
 
